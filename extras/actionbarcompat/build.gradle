@@ -1,7 +1,7 @@
 apply plugin: 'android-library'
 
 dependencies {
-    compile project(':library')
+    compile project(':ActionBar-PullToRefresh:ptrlibrary')
     compile "com.android.support:appcompat-v7:+"
 }
 
