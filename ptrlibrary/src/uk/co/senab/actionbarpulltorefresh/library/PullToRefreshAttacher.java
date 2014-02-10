@@ -16,6 +16,7 @@
 
 package uk.co.senab.actionbarpulltorefresh.library;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -452,6 +453,7 @@ public class PullToRefreshAttacher {
         }
         if (!mIsRefreshing) {
             reset(true);
+            //mHeaderTransformer.onRefreshMinimized();
         }
     }
 
@@ -481,6 +483,7 @@ public class PullToRefreshAttacher {
     protected EnvironmentDelegate createDefaultEnvironmentDelegate() {
         return new EnvironmentDelegate() {
             @Override
+            @SuppressLint("NewApi")
             public Context getContextForInflater(Activity activity) {
                 Context context = null;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -551,8 +554,16 @@ public class PullToRefreshAttacher {
             getHeaderView().removeCallbacks(mRefreshMinimizeRunnable);
         }
 
+        /* if (!fromTouch) {
+            mHeaderTransformer.onFinished();
+        } */
+        if (!fromTouch) {
+            mHeaderTransformer.hideProgressBar();
+        } else {
+
         // Hide Header View
         hideHeaderView();
+        }
     }
 
     private void startRefresh(View view, boolean fromTouch) {

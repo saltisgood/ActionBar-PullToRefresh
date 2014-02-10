@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -134,12 +135,28 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
         }
     }
 
+    /* @Override
+    public void onFinished() {
+        if (mHeaderProgressBar != null) {
+            mHeaderProgressBar.setVisibility(View.INVISIBLE);
+            mHeaderProgressBar.setProgress(0);
+            mHeaderProgressBar.setIndeterminate(false);
+        }
+    } */
+
     @Override
     public void onPulled(float percentagePulled) {
         if (mHeaderProgressBar != null) {
             mHeaderProgressBar.setVisibility(View.VISIBLE);
             final float progress = mInterpolator.getInterpolation(percentagePulled);
             mHeaderProgressBar.setProgress(Math.round(mHeaderProgressBar.getMax() * progress));
+        }
+    }
+
+    @Override
+    public void hideProgressBar() {
+        if (mHeaderProgressBar != null) {
+            mHeaderProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -165,6 +182,7 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
     }
 
     @Override
+    @SuppressLint("NewApi")
     public void onRefreshMinimized() {
         // Here we fade out most of the header, leaving just the progress bar
         if (mContentLayout != null) {
@@ -177,6 +195,7 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
     }
 
     @Override
+    @SuppressLint("NewApi")
     public boolean showHeaderView() {
         final boolean changeVis = mHeaderView.getVisibility() != View.VISIBLE;
 
@@ -195,6 +214,7 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
     }
 
     @Override
+    @SuppressLint("NewApi")
     public boolean hideHeaderView() {
         final boolean changeVis = mHeaderView.getVisibility() != View.GONE;
 
@@ -426,6 +446,7 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
         return Build.VERSION_CODES.ICE_CREAM_SANDWICH;
     }
 
+    @SuppressLint("NewApi")
     class HideAnimationCallback extends AnimatorListenerAdapter {
         @Override
         public void onAnimationEnd(Animator animation) {

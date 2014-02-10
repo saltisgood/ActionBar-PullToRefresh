@@ -87,6 +87,8 @@ public abstract class HeaderTransformer {
      */
     public abstract boolean hideHeaderView();
 
+    public abstract void hideProgressBar();
+
     /**
      * Called when the Activity's configuration has changed.
      *

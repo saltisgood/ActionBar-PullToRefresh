@@ -16,6 +16,7 @@
 
 package uk.co.senab.actionbarpulltorefresh.library;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -27,6 +28,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import org.holoeverywhere.widget.TextView;
 
 import java.util.HashSet;
 
@@ -155,6 +158,7 @@ public class PullToRefreshLayout extends FrameLayout {
     }
 
     @Override
+    @TargetApi(8)
     protected void onConfigurationChanged(Configuration newConfig) {
         if (mPullToRefreshAttacher != null) {
             mPullToRefreshAttacher.onConfigurationChanged(newConfig);

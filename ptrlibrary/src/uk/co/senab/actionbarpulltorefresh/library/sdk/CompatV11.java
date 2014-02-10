@@ -17,8 +17,10 @@
 package uk.co.senab.actionbarpulltorefresh.library.sdk;
 
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.view.View;
 
+@TargetApi(11)
 class CompatV11 {
 
     static void setAlpha(View view, float alpha) {
